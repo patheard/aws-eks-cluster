@@ -8,11 +8,12 @@ terraform plan
 terraform apply
 ```
 
-# Update command
+# Update cluster addons
 Use the following eksctl commands to update:
 * [coredns](https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html)
 * [kube-proxy](https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html)
 * [vpc-cni](https://docs.aws.amazon.com/eks/latest/userguide/managing-vpc-cni.html)
+
 ```sh
 # Addons
 export ADDON_NAME="coredns" # or "kube-proxy", "vpc-cni"
@@ -34,9 +35,18 @@ eksctl update addon \
     --force
 ```
 
-# Test deployment
+# Create OICD provider
+To attach IAM policies to k8s service accounts, you'll need the following:
+* [OICD provider](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html).
+* [IAM role for the service account](https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html)
+* [Associate role with service account](https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html)
+
+# Test
+Creates an nginx deployment and port forwards so you can access it from http://localhost:8080.
+
 ```sh
-k-config # generate the kubeconfig
+# generate the kubeconfig
+k-config
 
 # Create an nginx deployment
 kubectl create -f https://k8s.io/examples/admin/namespace-dev.json
