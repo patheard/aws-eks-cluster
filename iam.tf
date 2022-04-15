@@ -3,7 +3,7 @@
 ###
 
 resource "aws_iam_role" "test_cluster_role" {
-  name = "test_cluster_role"
+  name               = "test_cluster_role"
   assume_role_policy = data.aws_iam_policy_document.eks_service_assume.json
 }
 
@@ -34,7 +34,7 @@ resource "aws_iam_role_policy_attachment" "eks-AmazonEKSVPCResourceController" {
 ###
 
 resource "aws_iam_role" "test_cluster_worker_role" {
-  name = "test_cluster_worker_role"
+  name               = "test_cluster_worker_role"
   assume_role_policy = data.aws_iam_policy_document.ec2_service_assume.json
 }
 
