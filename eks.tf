@@ -3,9 +3,9 @@
 ###
 
 resource "aws_eks_cluster" "test_cluster" {
-  name     = "test-cluster"
+  name     = "test_cluster"
   role_arn = aws_iam_role.test_cluster_role.arn
-  version  = "1.19"
+  version  = "1.20"
 
   enabled_cluster_log_types = ["api", "audit", "controllerManager", "scheduler", "authenticator"]
 
@@ -24,7 +24,6 @@ resource "aws_eks_cluster" "test_cluster" {
 
 resource "aws_security_group" "test_cluster_worker" {
   name        = "test_cluster_worker"
-  description = "ALB to Worker communication"
   vpc_id      = module.vpc.vpc_id
 }
 
@@ -34,11 +33,11 @@ resource "aws_security_group" "test_cluster_worker" {
 
 resource "aws_eks_node_group" "test_cluster_node_group" {
   cluster_name    = aws_eks_cluster.test_cluster.name
-  node_group_name = "test-cluster-node-group"
+  node_group_name = "test_cluster_node_group"
   node_role_arn   = aws_iam_role.test_cluster_worker_role.arn
   subnet_ids      = module.vpc.private_subnet_ids
 
-  release_version = "1.19.15-20220317"
+  release_version = "1.20.11-20220406"
   instance_types  = ["t2.small"]
 
   scaling_config {
