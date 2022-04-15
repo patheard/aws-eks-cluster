@@ -1,5 +1,5 @@
 # AWS EKS Cluster
-Creates an EKS cluster and managed node group to test cluster upgrades with.
+Creates an EKS cluster and managed node group to test cluster upgrades.
 
 ```sh
 # Plan and apply
