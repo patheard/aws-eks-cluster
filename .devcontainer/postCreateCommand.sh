@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Upgrade everything
+sudo apt update && sudo apt upgrade -y
+
 # AWS cli autocomplete and aliases
 echo -e "complete -C /usr/local/bin/aws_completer aws" >> ~/.zshrc
 
