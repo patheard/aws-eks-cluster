@@ -1,33 +1,40 @@
 {
   "name": "aws-eks-cluster",
   "image": "mcr.microsoft.com/vscode/devcontainers/base:buster",
+
   "features": {
     "aws-cli": "latest",
+
     "kubectl-helm-minikube": {
       "version": "latest",
       "helm": "latest",
       "minikube": "none"
     },
+
     "terraform": {
       "version": "latest",
       "tflint": "none",
       "terragrunt": "none"
     }
   },
+
   "containerEnv": {
     "SHELL": "/bin/zsh"
   },
+
   "settings": {
     "[terraform]": {
       "editor.formatOnSave": true
     }
   },
+
   "extensions": [
     "hashicorp.terraform",
     "redhat.vscode-yaml",
     "sebastianbille.iam-legend",
     "github.copilot"
   ],
+
   "remoteUser": "vscode",
   "postCreateCommand": ".devcontainer/postCreateCommand.sh"
 }
