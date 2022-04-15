@@ -5,7 +5,7 @@
 resource "aws_eks_cluster" "test_cluster" {
   name     = "test_cluster"
   role_arn = aws_iam_role.test_cluster_role.arn
-  version  = "1.20"
+  version  = var.cluster_version
 
   enabled_cluster_log_types = ["api", "audit", "controllerManager", "scheduler", "authenticator"]
 
@@ -37,8 +37,8 @@ resource "aws_eks_node_group" "test_cluster_node_group" {
   node_role_arn   = aws_iam_role.test_cluster_worker_role.arn
   subnet_ids      = module.vpc.private_subnet_ids
 
-  release_version = "1.20.11-20220406"
-  instance_types  = ["t2.small"]
+  release_version = var.node_group_ami_version
+  instance_types  = [var.node_group_instance_type]
 
   scaling_config {
     desired_size = 2
