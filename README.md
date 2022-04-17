@@ -20,7 +20,7 @@ Use the following eksctl commands to update:
 export ADDON_NAME="coredns" # or "kube-proxy", "vpc-cni"
 export ADDON_VERSION="1.10.2-eksbuild.1" # specific to the addon and k8s version
 export AWS_REGION="ca-central-1"
-export CLUSTER_NAME="test_cluster"
+export CLUSTER_NAME="test-cluster"
 
 eksctl create addon \
     --name "$ADDON_NAME" \

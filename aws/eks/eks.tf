@@ -3,7 +3,7 @@
 ###
 
 resource "aws_eks_cluster" "test_cluster" {
-  name     = "test_cluster"
+  name     = "test-cluster"
   role_arn = aws_iam_role.test_cluster_role.arn
   version  = var.cluster_version
 
@@ -23,8 +23,8 @@ resource "aws_eks_cluster" "test_cluster" {
 }
 
 resource "aws_security_group" "test_cluster_worker" {
-  name        = "test_cluster_worker"
-  vpc_id      = module.vpc.vpc_id
+  name   = "test-cluster-worker"
+  vpc_id = module.vpc.vpc_id
 }
 
 ###
@@ -33,7 +33,7 @@ resource "aws_security_group" "test_cluster_worker" {
 
 resource "aws_eks_node_group" "test_cluster_node_group" {
   cluster_name    = aws_eks_cluster.test_cluster.name
-  node_group_name = "test_cluster_node_group"
+  node_group_name = "test-cluster-node-group"
   node_role_arn   = aws_iam_role.test_cluster_worker_role.arn
   subnet_ids      = module.vpc.private_subnet_ids
 
