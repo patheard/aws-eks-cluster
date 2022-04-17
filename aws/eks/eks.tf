@@ -61,23 +61,23 @@ resource "aws_eks_node_group" "test_cluster_node_group" {
 # AWS EKS addons
 ###
 
-resource "aws_eks_addon" "vpc_cni" {
+resource "aws_eks_addon" "coredns" {
   cluster_name      = aws_eks_cluster.test_cluster.name
-  addon_name        = "vpc-cni"
-  addon_version     = "v1.10.2-eksbuild.1"
+  addon_name        = "coredns"
+  addon_version     = var.cluster_addon_coredns_version
   resolve_conflicts = "OVERWRITE"
 }
 
 resource "aws_eks_addon" "kube_proxy" {
   cluster_name      = aws_eks_cluster.test_cluster.name
   addon_name        = "kube-proxy"
-  addon_version     = "v1.19.6-eksbuild.2"
+  addon_version     = var.cluster_addon_kube_proxy_version
   resolve_conflicts = "OVERWRITE"
 }
 
-resource "aws_eks_addon" "coredns" {
+resource "aws_eks_addon" "vpc_cni" {
   cluster_name      = aws_eks_cluster.test_cluster.name
-  addon_name        = "coredns"
-  addon_version     = "v1.8.0-eksbuild.1"
+  addon_name        = "vpc-cni"
+  addon_version     = var.cluster_addon_vpc_cni_version
   resolve_conflicts = "OVERWRITE"
 }
