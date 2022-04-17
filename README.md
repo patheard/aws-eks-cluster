@@ -10,31 +10,13 @@ terraform apply
 ```
 
 # Update cluster addons
-Use the following eksctl commands to update:
+After an upgrade, bump the versions of the following addons:
+
 * [coredns](https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html)
 * [kube-proxy](https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html)
 * [vpc-cni](https://docs.aws.amazon.com/eks/latest/userguide/managing-vpc-cni.html)
 
-```sh
-# Addons
-export ADDON_NAME="coredns" # or "kube-proxy", "vpc-cni"
-export ADDON_VERSION="1.10.2-eksbuild.1" # specific to the addon and k8s version
-export AWS_REGION="ca-central-1"
-export CLUSTER_NAME="test-cluster"
-
-eksctl create addon \
-    --name "$ADDON_NAME" \
-    --cluster "$CLUSTER_NAME" \
-    --force
-eksctl get addon \
-    --name "$ADDON_NAME" \
-    --cluster "$CLUSTER_NAME"
-eksctl update addon \
-    --name "$ADDON_NAME" \
-    --cluster "$CLUSTER_NAME" \
-    --version "$ADDON_VERSION" \
-    --force
-```
+This is controlled with [Terraform `aws_eks_addon` resources](https://github.com/patheard/aws-eks-cluster/blob/99797b1766008755067692bd1e5e02639b509435/aws/eks/eks.tf#L64-L83).
 
 # Test
 Creates an nginx deployment and port forwards so you can access it from http://localhost:8080.
