@@ -56,3 +56,28 @@ resource "aws_eks_node_group" "test_cluster_node_group" {
     aws_iam_role_policy_attachment.eks-worker-AmazonEKS_CNI_Policy
   ]
 }
+
+###
+# AWS EKS addons
+###
+
+resource "aws_eks_addon" "vpc_cni" {
+  cluster_name      = aws_eks_cluster.test_cluster.name
+  addon_name        = "vpc-cni"
+  addon_version     = "v1.10.2-eksbuild.1"
+  resolve_conflicts = "OVERWRITE"
+}
+
+resource "aws_eks_addon" "kube_proxy" {
+  cluster_name      = aws_eks_cluster.test_cluster.name
+  addon_name        = "kube-proxy"
+  addon_version     = "v1.20.7-eksbuild.1"
+  resolve_conflicts = "OVERWRITE"
+}
+
+resource "aws_eks_addon" "coredns" {
+  cluster_name      = aws_eks_cluster.test_cluster.name
+  addon_name        = "coredns"
+  addon_version     = "v1.8.3-eksbuild.1"
+  resolve_conflicts = "OVERWRITE"
+}
